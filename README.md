@@ -83,16 +83,14 @@ than just asserting it.
 ## Findings
 
 ### Stage 1 :- Single Stock (AAPL)
-> Fill in after running.
-- CAPM R²: **[value]**
-- 3-Factor R²: **[value]**
+- CAPM R²: **0.46**
+- 3-Factor R²: **0.53**
 - Factor loadings: Mkt-RF **[β, p-value]**, SMB **[β, p-value]**, HML **[β, p-value]**
 - Which factors were statistically significant, and which weren't?
 
 ### Stage 2 :- Portfolio (8 Stocks)
-> Fill in after running.
-- 3-Factor R²: **[value]**
-- Factor loadings: Mkt-RF **[β, p-value]**, SMB **[β, p-value]**, HML **[β, p-value]**
+- 3-Factor R²: **0.876074**
+- Factor loadings: Mkt-RF **0.882786, p = 0.000**, SMB **0.288700, p = 0.000**, HML **0.241438, p =  0.000** 
 - Did standard errors shrink relative to the single-stock case? Did SMB's significance improve?
 
 ## So What? (Risk Relevance)
