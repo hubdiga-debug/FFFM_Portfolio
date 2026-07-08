@@ -90,7 +90,7 @@ than just asserting it.
 
 ### Stage 2 :- Portfolio (8 Stocks)
 - 3-Factor R²: **0.876074**
-- Factor loadings: Mkt-RF **0.882786, p = 0.000**, SMB **0.288700, p = 0.000**, HML **0.241438, p =  0.000** 
+- Factor loadings [β, p-value]: Mkt-RF **0.882786,0.000**, SMB **0.288700,0.000**, HML **0.241438,0.000** 
 - Did standard errors shrink relative to the single-stock case? Did SMB's significance improve?
 
 ## So What? (Risk Relevance)
