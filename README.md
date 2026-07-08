@@ -1,59 +1,111 @@
 # Fama-French Multi-Factor Risk Decomposition
 
 ## Problem Statement
-CAPM explains returns with a single factor (market beta). But real risk isn't just market
-exposure — it's exposure to *style factors* like size and value. This project decomposes a
-stock's (or portfolio's) returns into the Fama-French 3-factor model and compares it directly
-against the single-factor CAPM baseline from the companion project.
 
-**Risk question being answered:** How much of the portfolio's return variation is explained by
-market risk alone vs. market + size + value risk? Which factor exposures matter most, and are
-they statistically reliable?
+CAPM explains stock returns using a single risk factor: exposure to the broad market. But in
+practice, a meaningful portion of a stock's return behavior is driven by *style* factors — how
+"small" or "large" a company is (size), and whether it behaves like a value stock or a growth
+stock (value/growth). This project builds up a factor-based risk model in two stages:
+
+1. **Single-stock analysis (AAPL):** Compare a CAPM (market-only) model against a Fama-French
+   3-factor model to see how much additional risk is explained once size and value are added.
+2. **Portfolio extension (8 stocks):** Re-run the same comparison on a diversified, equal-weighted
+   portfolio to test whether factor loadings become more statistically reliable once
+   company-specific noise is averaged out.
+
+This mirrors how real risk teams work: start by understanding a single position's risk drivers,
+then scale the same framework up to a portfolio.
+
+## Workflow
+
+### Stage 1 — Single Stock: CAPM vs. Fama-French 3-Factor (AAPL)
+
+The first stage answers a narrow question: for one stock, how much of its return variation is
+explained by market risk alone, versus market + size + value risk combined?
+
+- Pull AAPL monthly returns and Fama-French factor data (Mkt-RF, SMB, HML, RF) over the same period
+- Run a CAPM regression: `excess_return = alpha + beta(Mkt-RF)`
+- Run a 3-factor regression: `excess_return = alpha + b1(Mkt-RF) + b2(SMB) + b3(HML)`
+- Compare R², adjusted R², and the significance of each factor loading
+
+This stage produces the baseline factor profile for a single name, and — importantly — surfaces a
+limitation: single-stock regressions carry a lot of idiosyncratic, company-specific noise, which
+can make secondary factors like SMB appear statistically insignificant even when a broader size
+effect might genuinely be present.
+
+### Stage 2 — Portfolio Extension: 8-Stock Equal-Weighted Portfolio
+
+To test whether that insignificance was a single-stock noise artifact rather than a real absence
+of size-factor exposure, the same 3-factor model is re-run on an equal-weighted portfolio of
+8 stocks, deliberately spread across sectors to diversify away idiosyncratic risk:
+
+- **AAPL** (Technology)
+- **MSFT** (Technology)
+- **JNJ** (Healthcare)
+- **XOM** (Energy)
+- **JPM** (Financials)
+- **PG** (Consumer Staples)
+- **KO** (Consumer Staples)
+- **CAT** (Industrials)
+
+Equal-weighting keeps the exercise simple and avoids having to justify weighting assumptions —
+the goal here isn't to build an optimal portfolio, it's to isolate the effect of diversification
+on the *statistical reliability* of the factor estimates.
+
+The single-stock and portfolio results are then compared side by side — coefficients, standard
+errors, and p-values — to see whether:
+- Standard errors shrink once idiosyncratic noise is averaged out across 8 names
+- SMB's significance improves (or at least its p-value drops meaningfully)
+- Any factor flips from insignificant to significant, or vice versa
+
+### Why This Sequencing Matters
+
+Going single-stock → portfolio isn't just a bigger dataset — it's a deliberate test of *when
+factor models are reliable*. Fama-French factors were built and validated on diversified
+portfolios, not individual names, so this workflow directly demonstrates that limitation rather
+than just asserting it.
 
 ## Data
-- **Stock/portfolio returns:** same source as CAPM project (`yfinance`)
+- **Stock/portfolio returns:** `yfinance`, monthly frequency
 - **Factor returns:** Fama-French 3-factor data from Kenneth French's Data Library
-  (Mkt-RF, SMB, HML, RF), downloaded via `pandas_datareader.famafrench`
-- **Period:** 01/01/2015 - 01/01/2025
-- **Frequency:** Monthly 
-
-## Methodology
-1. Pull stock returns and Fama-French factor data, aligned on date
-2. Compute excess stock return: R_i − Rf
-3. Run multiple linear regression:
-
-   R_i − Rf = α + β₁(Mkt-RF) + β₂(SMB) + β₃(HML) + ε
-
-4. Compare against single-factor CAPM (R² improvement, factor significance)
-5. Residual diagnostics — check if adding factors actually explains previously unexplained variation
+  (Mkt-RF, SMB, HML, RF), via `pandas_datareader`
+- **Period:** [fill in your actual date range]
 
 ## Key Files
-- `src/factor_data_loader.py` — pulls stock returns + Fama-French factors, aligns on date
-- `src/factor_model.py` — runs single-factor and multi-factor regressions, compares them
-- `notebooks/factor_analysis.ipynb` — full walkthrough with plots and commentary
+- `src/factor_data_loader.py` — pulls single-stock and portfolio returns, aligns with FF factors
+  - `build_factor_dataset()` — single-stock version
+  - `build_portfolio_factor_dataset()` — equal-weighted 8-stock portfolio version
+- `src/factor_model.py` — runs CAPM and 3-factor regressions, compares them side by side
+- `notebooks/factor_analysis.ipynb` — full walkthrough: single-stock analysis, then portfolio
+  extension, then side-by-side comparison
 - `outputs/` — saved charts and comparison tables
 
 ## Findings
-> Fill in after running the analysis. Example structure:
-- CAPM (market-only) R²: **[value]**
-- 3-Factor R²: **[value]** — an improvement of [X] percentage points
-- Factor loadings:
-  - Market (Mkt-RF): **[β, significance]**
-  - Size (SMB): **[β, significance]** — positive/negative tilt toward small-cap or large-cap
-  - Value (HML): **[β, significance]** — positive/negative tilt toward value or growth
-- Which factor(s) were statistically significant vs. noise?
+
+### Stage 1 — Single Stock (AAPL)
+> Fill in after running.
+- CAPM R²: **[value]**
+- 3-Factor R²: **[value]**
+- Factor loadings: Mkt-RF **[β, p-value]**, SMB **[β, p-value]**, HML **[β, p-value]**
+- Which factors were statistically significant, and which weren't?
+
+### Stage 2 — Portfolio (8 Stocks)
+> Fill in after running.
+- 3-Factor R²: **[value]**
+- Factor loadings: Mkt-RF **[β, p-value]**, SMB **[β, p-value]**, HML **[β, p-value]**
+- Did standard errors shrink relative to the single-stock case? Did SMB's significance improve?
 
 ## So What? (Risk Relevance)
-This is a simplified version of what commercial risk systems (MSCI Barra, Axioma, Bloomberg PORT)
-do at scale: decompose portfolio risk into factor exposures so a risk team can answer "where is
-this risk coming from?" rather than just "how much risk is there?"
 
-Example interpretation: [e.g., "The stock shows a significant negative loading on HML, meaning
-it behaves like a growth stock — if value factors sell off, this position is not the one that
-benefits, and if growth factors reverse, this position carries that risk directly."]
+This two-stage workflow mirrors a real judgment call risk teams make constantly: how much
+confidence to place in a factor exposure estimate depends on *what it was estimated on*. A
+single-position factor loading carries more estimation uncertainty than the same loading
+estimated on a diversified book — which matters directly for how confidently a risk team can act
+on a single name's factor exposure versus a portfolio-level one.
 
-A single-factor CAPM view would have missed this — it only tells you overall market sensitivity,
-not *which* style risk is embedded in the exposure.
+[Fill in with your specific comparison once you've run both stages — e.g., "SMB's standard error
+fell by X% moving from the single-stock to the portfolio regression, supporting the idea that the
+single-name insignificance was largely a noise artifact rather than a genuine absence of size risk."]
 
 ## How to Run
 ```bash
@@ -63,18 +115,8 @@ jupyter notebook notebooks/factor_analysis.ipynb
 ```
 
 ## Next Steps / Extensions
-- ✅ **Portfolio vs. single-stock comparison** — implemented in this repo. See `build_portfolio_factor_dataset()`
-  in `src/factor_data_loader.py` and Section 6 of the notebook. Runs the same 3-factor model on an
-  equal-weighted 8-stock portfolio to test whether averaging away idiosyncratic noise produces
-  tighter, more reliable factor loadings (particularly for SMB, which is often insignificant for
-  single mega-cap names).
 - Extend to 5-factor model (add RMW profitability, CMA investment factors)
-- Compare factor exposure stability over rolling windows (link back to CAPM project's rolling beta idea)
-
-### Extension Findings: Single Stock vs. Portfolio
-> Fill in after running Section 6 of the notebook. Example structure:
-- Single-stock SMB: coef = [value], std err = [value], p = [value] (insignificant)
-- Portfolio SMB: coef = [value], std err = [value], p = [value] ([significant/still insignificant])
-- Interpretation: [e.g., "Standard error on SMB shrank by X% moving from single stock to portfolio,
-  supporting the idea that idiosyncratic noise — not a true absence of size-factor exposure — was
-  driving the insignificance in the single-name regression."]
+- Compare factor exposure stability over rolling windows (link back to the CAPM project's
+  rolling beta idea)
+- Test alternative portfolio weightings (market-cap weighted vs. equal-weighted) to see whether
+  weighting scheme affects factor loading stability
