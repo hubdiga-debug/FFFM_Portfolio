@@ -69,7 +69,7 @@ than just asserting it.
 - **Stock/portfolio returns:** `yfinance`, monthly frequency
 - **Factor returns:** Fama-French 3-factor data from Kenneth French's Data Library
   (Mkt-RF, SMB, HML, RF), via `pandas_datareader`
-- **Period:** [fill in your actual date range]
+- **Period:** 01/01/2015 - 01/01/2025
 
 ## Key Files
 - `src/factor_data_loader.py` — pulls single-stock and portfolio returns, aligns with FF factors
