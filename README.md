@@ -6,7 +6,7 @@ exposure — it's exposure to *style factors* like size and value. This project 
 stock's (or portfolio's) returns into the Fama-French 3-factor model and compares it directly
 against the single-factor CAPM baseline from the companion project.
 
-**Risk question being answered:** How much of [TICKER]'s return variation is explained by
+**Risk question being answered:** How much of the portfolio's return variation is explained by
 market risk alone vs. market + size + value risk? Which factor exposures matter most, and are
 they statistically reliable?
 
