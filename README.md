@@ -85,12 +85,14 @@ than just asserting it.
 ### Stage 1 :- Single Stock (AAPL)
 - CAPM R²: **0.46**
 - 3-Factor R²: **0.53**
-- Factor loadings: Mkt-RF **[β, p-value]**, SMB **[β, p-value]**, HML **[β, p-value]**
+- Factor loadings[β, p-value]: Mkt-RF **1.222632, 0.00**, SMB **-0.1632,0.399**, HML **-0.5262, 0.00**
 - Which factors were statistically significant, and which weren't?
+
+## In this model, Mkt-RF and HML are statistically significant (\(p < 0.05\)), while SMB is statistically insignificant (\(p = 0.399\)). While the overall 3-factor model is jointly significant (high F-stat) and improves upon the CAPM's Adjusted \(R^{2}\), the SMB factor itself has no individual explanatory power. This is expected, as the Fama-French model is designed for diversified portfolios; when applied to a mega-cap single stock like AAPL, the size premium (SMB) becomes irrelevant because the stock represents the extreme 'Big' end of the spectrum
 
 ### Stage 2 :- Portfolio (8 Stocks)
 - 3-Factor R²: **0.876074**
-- Factor loadings [β, p-value]: Mkt-RF **0.882786,0.000**, SMB **0.288700,0.000**, HML **0.241438,0.000** 
+- Factor loadings [β, p-value]: Mkt-RF **0.882786, 0.000**, SMB **0.288700, 0.000**, HML **0.241438, 0.000** 
 - Did standard errors shrink relative to the single-stock case? Did SMB's significance improve?
 
 ## So What? (Risk Relevance)
