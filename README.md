@@ -88,7 +88,7 @@ than just asserting it.
 - Factor loadings[β, p-value]: Mkt-RF **1.222632, 0.00**, SMB **-0.1632,0.399**, HML **-0.5262, 0.00**
 - Which factors were statistically significant, and which weren't?
 
-## In this model, Mkt-RF and HML are statistically significant (\(p < 0.05\)), while SMB is statistically insignificant (\(p = 0.399\)). While the overall 3-factor model is jointly significant (high F-stat) and improves upon the CAPM's Adjusted \(R^{2}\), the SMB factor itself has no individual explanatory power. This is expected, as the Fama-French model is designed for diversified portfolios; when applied to a mega-cap single stock like AAPL, the size premium (SMB) becomes irrelevant because the stock represents the extreme 'Big' end of the spectrum
+#### In this model, Mkt-RF and HML are statistically significant (\(p < 0.05\)), while SMB is statistically insignificant (\(p = 0.399\)). While the overall 3-factor model is jointly significant (high F-stat) and improves upon the CAPM's Adjusted \(R^{2}\), the SMB factor itself has no individual explanatory power. This is expected, as the Fama-French model is designed for diversified portfolios; when applied to a mega-cap single stock like AAPL, the size premium (SMB) becomes irrelevant because the stock represents the extreme 'Big' end of the spectrum
 
 ### Stage 2 :- Portfolio (8 Stocks)
 - 3-Factor R²: **0.876074**
