@@ -13,13 +13,12 @@ they statistically reliable?
 ## Data
 - **Stock/portfolio returns:** same source as CAPM project (`yfinance`)
 - **Factor returns:** Fama-French 3-factor data from Kenneth French's Data Library
-  (Mkt-RF, SMB, HML, RF) — downloaded via `pandas_datareader.famafrench`
-- **Period:** [match your CAPM project period for direct comparison]
-- **Frequency:** Monthly (Fama-French factors are most reliably available monthly; weekly/daily
-  exists but monthly is the standard convention for this model)
+  (Mkt-RF, SMB, HML, RF), downloaded via `pandas_datareader.famafrench`
+- **Period:** 01/01/2015 - 01/01/2025
+- **Frequency:** Monthly 
 
 ## Methodology
-1. Pull stock returns and Fama-French factor data, align on date
+1. Pull stock returns and Fama-French factor data, aligned on date
 2. Compute excess stock return: R_i − Rf
 3. Run multiple linear regression:
 
