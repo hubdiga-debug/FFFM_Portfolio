@@ -18,7 +18,7 @@ then scale the same framework up to a portfolio.
 
 ## Workflow
 
-### Stage 1 — Single Stock: CAPM vs. Fama-French 3-Factor (AAPL)
+### Stage 1 : Single Stock: CAPM vs. Fama-French 3-Factor (AAPL)
 
 The first stage answers a narrow question: for one stock, how much of its return variation is
 explained by market risk alone, versus market + size + value risk combined?
@@ -33,7 +33,7 @@ limitation: single-stock regressions carry a lot of idiosyncratic, company-speci
 can make secondary factors like SMB appear statistically insignificant even when a broader size
 effect might genuinely be present.
 
-### Stage 2 — Portfolio Extension: 8-Stock Equal-Weighted Portfolio
+### Stage 2 : Portfolio Extension: 8-Stock Equal-Weighted Portfolio
 
 To test whether that insignificance was a single-stock noise artifact rather than a real absence
 of size-factor exposure, the same 3-factor model is re-run on an equal-weighted portfolio of
@@ -82,14 +82,14 @@ than just asserting it.
 
 ## Findings
 
-### Stage 1 — Single Stock (AAPL)
+### Stage 1 :- Single Stock (AAPL)
 > Fill in after running.
 - CAPM R²: **[value]**
 - 3-Factor R²: **[value]**
 - Factor loadings: Mkt-RF **[β, p-value]**, SMB **[β, p-value]**, HML **[β, p-value]**
 - Which factors were statistically significant, and which weren't?
 
-### Stage 2 — Portfolio (8 Stocks)
+### Stage 2 :- Portfolio (8 Stocks)
 > Fill in after running.
 - 3-Factor R²: **[value]**
 - Factor loadings: Mkt-RF **[β, p-value]**, SMB **[β, p-value]**, HML **[β, p-value]**
@@ -116,7 +116,5 @@ jupyter notebook notebooks/factor_analysis.ipynb
 
 ## Next Steps / Extensions
 - Extend to 5-factor model (add RMW profitability, CMA investment factors)
-- Compare factor exposure stability over rolling windows (link back to the CAPM project's
-  rolling beta idea)
 - Test alternative portfolio weightings (market-cap weighted vs. equal-weighted) to see whether
   weighting scheme affects factor loading stability
