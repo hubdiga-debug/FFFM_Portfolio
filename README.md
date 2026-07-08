@@ -95,6 +95,8 @@ than just asserting it.
 - Factor loadings [β, p-value]: Mkt-RF **0.882786, 0.000**, SMB **0.288700, 0.000**, HML **0.241438, 0.000** 
 - Did standard errors shrink relative to the single-stock case? Did SMB's significance improve?
 
+####  In Model 2, applying the regression to a well-diversified portfolio caused the \(R^{2}\) to rise sharply and the SMB factor to become statistically significant . This confirms that the Fama-French model is fundamentally engineered to capture cross-sectional risk premiums across broader asset classes rather than isolating the returns of individual stocks.
+
 ## So What? (Risk Relevance)
 
 This two-stage workflow mirrors a real judgment call risk teams make constantly: how much
@@ -103,9 +105,6 @@ single-position factor loading carries more estimation uncertainty than the same
 estimated on a diversified book — which matters directly for how confidently a risk team can act
 on a single name's factor exposure versus a portfolio-level one.
 
-[Fill in with your specific comparison once you've run both stages — e.g., "SMB's standard error
-fell by X% moving from the single-stock to the portfolio regression, supporting the idea that the
-single-name insignificance was largely a noise artifact rather than a genuine absence of size risk."]
 
 ## How to Run
 ```bash
