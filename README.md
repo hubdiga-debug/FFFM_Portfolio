@@ -97,13 +97,6 @@ than just asserting it.
 
 ####  In Model 2, applying the regression to a well-diversified portfolio caused the \(R^{2}\) to rise sharply and the SMB factor to become statistically significant . This confirms that the Fama-French model is fundamentally engineered to capture cross-sectional risk premiums across broader asset classes rather than isolating the returns of individual stocks.
 
-## So What? (Risk Relevance)
-
-This two-stage workflow mirrors a real judgment call risk teams make constantly: how much
-confidence to place in a factor exposure estimate depends on *what it was estimated on*. A
-single-position factor loading carries more estimation uncertainty than the same loading
-estimated on a diversified book — which matters directly for how confidently a risk team can act
-on a single name's factor exposure versus a portfolio-level one.
 
 
 ## How to Run
